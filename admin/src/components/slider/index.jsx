@@ -1,84 +1,85 @@
 import React, { PureComponent } from 'react';
-import { Layout } from 'antd';
-import { withRouter } from 'react-router-dom';
-import { menus } from './menu';
-import SliderMenu from './sliderMenu';
+import { Layout, Menu, Icon } from 'antd';
+import { withRouter, Link } from 'react-router-dom';
+import { allMenu } from './menu';
+
+const SubMenu = Menu.SubMenu;
 const { Sider } = Layout;
 
 class Slider extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
+      theme: 'dark',
+      current: 'index',
       collapsed: false,
-      mode: 'inline',
-      openKey: '',
-      selectedKey: '',
-      firstHide: true,
+      mode: 'inline',  // 水平垂直展现
     }
   }
   componentDidMount() {
-    this.setMenuOpen(this.props);
+    this.handleClick([], 'index');
   }
-  componentWillReceiveProps(nextProps) {
-    console.log(nextProps);
-    this.onCollapse(nextProps.collapsed);
-    this.setMenuOpen(nextProps)
+  changeTheme = (value) => {
+    this.setState({
+      theme: value ? 'dark' : 'light',
+    });
   }
-  setMenuOpen = props => {
-    const { pathname } = props.location;
+  toggle = () => {
     this.setState({
-      openKey: pathname.substr(0, pathname.lastIndexOf('/')),
-      selectedKey: pathname
+      collapsed: !this.state.collapsed,
+      mode: this.state.collapsed ? 'inline' : 'vertical',
     });
-  };
-  onCollapse = (collapsed) => {
-    console.log(collapsed);
+  }
+  clear = () => {
     this.setState({
-      collapsed,
-      firstHide: collapsed,
-      mode: collapsed ? 'vertical' : 'inline',
+      current: 'index',
     });
-  };
-  menuClick = e => {
+  }
+  handleClick = (e, special) => {
     this.setState({
-      selectedKey: e.key
+      current: e.key || special,
     });
-    console.log(this.state);
-    const { popoverHide } = this.props;     // 响应式布局控制小屏幕点击菜单时隐藏菜单操作
-    popoverHide && popoverHide();
-  };
-  openMenu = v => {
-    console.log(v);
-    this.setState({
-      openKey: v[v.length - 1],
-      firstHide: false,
-    })
-  };
+  }
   render() {
     return (
       <Sider
-        trigger={null}
-        breakpoint="lg"
-        collapsed={this.props.collapsed}
-        style={{ overflowY: 'auto' }}
+        collapsible
+        collapsed={this.state.collapsed}
+        onCollapse={this.onCollapse}
+        className="leftMenu"
       >
-        <SliderMenu
-          menus={menus}
-          onClick={this.menuClick}
-          theme="dark"
-          mode="inline"
-          selectedKeys={[this.state.selectedKey]}
-          openKeys={this.state.firstHide ? null : [this.state.openKey]}
-          onOpenChange={this.openMenu}
-        />
-        <style>
-          {`
-              #nprogress .spinner{
-                  left: ${this.state.collapsed ? '70px' : '206px'};
-                  right: 0 !important;
+        {this.state.theme === 'light' ? <a href="https://github.com/MuYunyun/react-antd-demo" target='_blank' rel='noopener noreferrer'><Icon type="github" className="github" /></a> :
+          <a href="https://github.com/MuYunyun/react-antd-demo" target='_blank' rel='noopener noreferrer'><Icon type="github" className="github white" /></a>}
+        {this.state.theme === 'light' ? <span className="author">牧之</span> : <span className="author white">Vhen</span>}
+        <Menu
+          theme={this.state.theme}
+          onClick={this.handleClick}
+          defaultOpenKeys={['']}
+          selectedKeys={[this.state.current]}
+          className="menu"
+          mode={this.state.mode}
+        >
+          {
+            allMenu.map((subMenu) => {
+              if (subMenu.children && subMenu.children.length) {
+                return (
+                  <SubMenu key={subMenu.url} title={<span><Icon type={subMenu.icon} /><span>{subMenu.name}</span></span>}>
+                    {subMenu.children.map(menu => (
+                      <Menu.Item key={menu.url}><Link to={`/${menu.url}`}>{menu.name}</Link></Menu.Item>
+                    ))}
+                  </SubMenu>
+                )
               }
-              `}
-        </style>
+              return (
+                <Menu.Item key={subMenu.url}>
+                  <Link to={`/${subMenu.url}`}>
+                    <Icon type={subMenu.icon} /><span className="nav-text">{subMenu.name}</span>
+                  </Link>
+                </Menu.Item>
+              )
+            })
+          }
+        </Menu>
       </Sider>
     );
   }

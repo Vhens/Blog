@@ -5,7 +5,6 @@ import  { Provider } from 'mobx-react';
 import { useStrict } from 'mobx';
 import routes from './routes';
 import registerServiceWorker from './registerServiceWorker';
-
 const stores = { Store };
 useStrict(true);
 
