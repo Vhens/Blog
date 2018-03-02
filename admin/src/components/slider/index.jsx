@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { Layout, Menu, Icon } from 'antd';
+import { Layout, Menu, Icon, Switch } from 'antd';
 import { withRouter, Link } from 'react-router-dom';
 import { allMenu } from './menu';
 
@@ -9,55 +9,25 @@ const { Sider } = Layout;
 class Slider extends PureComponent {
   constructor(props) {
     super(props);
-    this.state = {
-      theme: 'dark',
-      current: 'index',
-      collapsed: false,
-      mode: 'inline',  // 水平垂直展现
-    }
-  }
-  componentDidMount() {
-    this.handleClick([], 'index');
-  }
-  changeTheme = (value) => {
-    this.setState({
-      theme: value ? 'dark' : 'light',
-    });
-  }
-  toggle = () => {
-    this.setState({
-      collapsed: !this.state.collapsed,
-      mode: this.state.collapsed ? 'inline' : 'vertical',
-    });
-  }
-  clear = () => {
-    this.setState({
-      current: 'index',
-    });
-  }
-  handleClick = (e, special) => {
-    this.setState({
-      current: e.key || special,
-    });
   }
   render() {
     return (
       <Sider
         collapsible
-        collapsed={this.state.collapsed}
+        collapsed={this.props.collapsed}
         onCollapse={this.onCollapse}
         className="leftMenu"
       >
-        {this.state.theme === 'light' ? <a href="https://github.com/MuYunyun/react-antd-demo" target='_blank' rel='noopener noreferrer'><Icon type="github" className="github" /></a> :
-          <a href="https://github.com/MuYunyun/react-antd-demo" target='_blank' rel='noopener noreferrer'><Icon type="github" className="github white" /></a>}
-        {this.state.theme === 'light' ? <span className="author">牧之</span> : <span className="author white">Vhen</span>}
+        {this.props.theme === 'light' ? <a href="https://github.com/MuYunyun/react-antd-demo" target='_blank' rel='noopener noreferrer'><Icon type="github" className="github" /></a> :
+          <a href="https://github.com/Vhens/blog/tree/master/admin" target='_blank' rel='noopener noreferrer'><Icon type="github" className="github white" /></a>}
+        {this.props.theme === 'light' ? <span className="author">Vhen</span> : <span className="author white">Vhen</span>}
         <Menu
-          theme={this.state.theme}
-          onClick={this.handleClick}
+          theme={this.props.theme}
+          onClick={this.props.handleClick}
           defaultOpenKeys={['']}
-          selectedKeys={[this.state.current]}
+          selectedKeys={[this.props.current]}
           className="menu"
-          mode={this.state.mode}
+          mode={this.props.mode}
         >
           {
             allMenu.map((subMenu) => {
@@ -80,6 +50,14 @@ class Slider extends PureComponent {
             })
           }
         </Menu>
+        <div className="switch">
+          <Switch
+            checked={this.props.theme === 'dark'}
+            onChange={this.props.changeTheme}
+            checkedChildren="Dark"
+            unCheckedChildren="Light"
+          />
+        </div>
       </Sider>
     );
   }

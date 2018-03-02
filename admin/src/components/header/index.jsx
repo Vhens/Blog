@@ -1,11 +1,10 @@
 import React, { PureComponent } from 'react';
 import { Menu, Icon, Layout } from 'antd';
 import screenfull from 'screenfull';
-import { withRouter, Link } from 'react-router-dom';
+import { withRouter, Link, } from 'react-router-dom';
 import './header.scss';
 const SubMenu = Menu.SubMenu
 const { Header } = Layout
-/*eslint-disable */
 class Top extends PureComponent {
   constructor(props) {
     super(props);
@@ -31,6 +30,9 @@ class Top extends PureComponent {
         screenfull.request();
     }
   }
+  handleLogin() {
+    this.props.history.push('/login');
+  }
   render() {
     return(
       <Header style={{ background: '#fff'}}>
@@ -41,7 +43,7 @@ class Top extends PureComponent {
         />
         <Menu mode="horizontal" className="logOut" onClick={this.clear}>
           <SubMenu title={<span><Icon type="user" />{ this.state.username }</span>} >
-              <Menu.Item key="logOut"><Link to="/login" >退出</Link></Menu.Item>
+              <Menu.Item key="logOut"><span onClick={this.handleLogin.bind(this)}>退出</span></Menu.Item>
           </SubMenu>
         </Menu>
         <Icon
