@@ -1,0 +1,17 @@
+.login{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+  .login-form{
+    width: 320px;
+    padding: 36px;
+    box-shadow: 0 0 100px rgba(0, 0, 0, .08);
+    border-radius: 4px;
+    background-color: #fff;
+  }
+  button {
+    width: 100%;
+  }
+}

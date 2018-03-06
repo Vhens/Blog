@@ -3,7 +3,7 @@ import * as ReactDOM from 'react-dom'
 import Store from './store';
 import  { Provider } from 'mobx-react';
 import { useStrict } from 'mobx';
-import routes from './routes';
+import Page from './Page';
 import registerServiceWorker from './registerServiceWorker';
 const stores = { Store };
 useStrict(true);
@@ -17,5 +17,5 @@ const render = (Component) => {
   )
 }
 
-render(routes)
+render(Page)
 registerServiceWorker();
