@@ -1,9 +1,10 @@
 import React, { PureComponent } from 'react';
 import { Layout } from 'antd';
+import { withRouter } from 'react-router-dom';
 
 import './footer.scss';
 const { Footer } = Layout
-export default class Foot extends PureComponent {
+class Foot extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
@@ -29,3 +30,4 @@ export default class Foot extends PureComponent {
     );
   }
 }
+export default withRouter(Foot);

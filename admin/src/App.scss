@@ -1,13 +1,13 @@
 .ant-layout-sider-collapsed .anticon {  // 放在.github前面原因猜想是渲染。
   font-size: 20px;
 }
-
 .container {
     position: absolute;
     top: 0;
     bottom: 0;
     left: 0;
     right: 0;
+    min-width: 1200px;
     .github {
         position: absolute;
         top: 20px;
@@ -66,9 +66,17 @@
     display: none;
 }
 .content {
+    display: flex;
     position: relative;
-    margin: 24px 0 0 16px;
-    padding: 24px;
+    margin: 24px 16px 0 16px;
     background: #fff;
-    overflow: scroll;
+    overflow: auto;
+    //美化webkit内核滚动条
+    &::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+    }
+    &::-webkit-scrollbar-thumb {
+        background-color: #777;
+    }
 }

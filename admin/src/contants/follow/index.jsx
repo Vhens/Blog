@@ -6,7 +6,7 @@ export default class Follow extends PureComponent {
   render() {
     return (
       <div>
-        follow
+        待开发...
       </div>
     );
   }

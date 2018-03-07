@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import { Menu, Icon, Layout } from 'antd';
 import screenfull from 'screenfull';
-import { withRouter, Link, } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 import './header.scss';
 const SubMenu = Menu.SubMenu
 const { Header } = Layout

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Layout } from 'antd';
+import { Layout, notification, Icon  } from 'antd';
 import { withRouter } from 'react-router-dom';
 import Slider from './components/slider';
 import Top from './components/header';
@@ -20,7 +20,16 @@ class App extends Component {
   componentDidMount() {
     this.handleClick([], 'app/home')
     this.props.history.push('/app/home');
+    setTimeout(this.openNotification, 1000);
   }
+  openNotification = () => {
+    notification.open({
+      message: '温馨提示',
+      description: '欢迎您来到博客后台系统',
+      duration: 3,
+      icon: <Icon type="smile-circle" style={{ color: '#108ee9' }} />
+    });
+  };
   changeTheme = (value) => {
     this.setState({
       theme: value ? 'dark' : 'light',

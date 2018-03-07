@@ -10,12 +10,17 @@ export const allMenu = [
     icon: 'user',
   },
   {
+    name: '相册模块',
+    url: 'app/gallery',
+    icon: 'camera-o',
+  },
+  {
     name: '搜索模块',
     url: 'search',
     icon: 'search',
     children: [{
       name: '搜索引擎',
-      url: 'searchEngine'
+      url: 'app/searchEngine'
     }, ],
   },
   {

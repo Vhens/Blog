@@ -1,0 +1,30 @@
+.home{
+  flex: auto;
+  overflow: hidden;
+  background-color: #f3f3f3;
+  .gutter-box{
+    padding: 5px 0;
+  }
+  .y-center{
+    display: flex;
+    align-items: center;
+  }
+  .clear{
+    overflow: hidden;
+  }
+  .text-danger{
+    color: #f44455;
+  }
+  .text-info{
+    color: #6887ff;
+  }
+  .text-success{
+    color: #6cc788;
+}
+  .text-2x{
+    font-size: 2rem;
+  }
+  .mr-m{
+    margin-right: 1rem;
+  }
+}
