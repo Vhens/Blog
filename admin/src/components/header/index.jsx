@@ -9,8 +9,11 @@ class Top extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      username: ''
+      username: '',
+      isFullScreen: false,
+      toggleScreenIcon: 'arrows-alt'
     }
+    this.toggleFullScreen = this.toggleFullScreen.bind(this)
   }
   componentDidMount() {
     this.getUser()
@@ -33,6 +36,49 @@ class Top extends PureComponent {
   handleLogin() {
     this.props.history.push('/login');
   }
+  // 全屏
+  fullScreen() {
+    const doc = document.documentElement
+    if (doc.requestFullscreen) {
+      doc.requestFullscreen()
+    } else if (doc.mozRequestFullScreen) {
+      doc.mozRequestFullScreen()
+    } else if (doc.webkitRequestFullScreen) {
+      doc.webkitRequestFullScreen()
+    } else if (doc.msRequestFullScreen) {
+      doc.msRequestFullScreen()
+    }
+  }
+  // 退出全屏
+  exitFullScreen () {
+    const doc = document.documentElement
+    if (document.exitFullscreen) {
+      document.exitFullscreen()
+    } else if (document.mozCancelFullScreen) {
+      document.mozCancelFullScreen()
+    } else if (document.webkitCancelFullScreen) {
+      document.webkitCancelFullScreen()
+    } else if (document.msCancelFullScreen) {
+      document.msCancelFullScreen()
+    }
+  }
+  // 切换屏幕大小
+  toggleFullScreen() {
+    this.setState({
+      isFullScreen: !this.state.isFullScreen
+    })
+    if(this.state.isFullScreen) {
+      this.exitFullScreen();
+      this.setState({
+        toggleScreenIcon: 'arrows-alt'
+      })
+    } else {
+      this.fullScreen();
+      this.setState({
+        toggleScreenIcon: 'shrink'
+      })
+    }
+  }
   render() {
     return(
       <Header style={{ background: '#fff'}}>
@@ -48,8 +94,8 @@ class Top extends PureComponent {
         </Menu>
         <Icon
           className="screenFull"
-          type="arrows-alt"
-          onClick={this.screenFull}
+          type= {this.state.toggleScreenIcon}
+          onClick={this.toggleFullScreen}
         />
       </Header>
     );

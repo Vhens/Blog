@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom';
 import Slider from './components/slider';
 import Top from './components/header';
 import Foot from './components/footer';
-import Routes from './routes'
+import Routes from './routes';
 import './App.scss';
 const { Content } = Layout;
 class App extends Component {
@@ -67,9 +67,9 @@ class App extends Component {
             toggle={this.toggle} 
             collapsed={this.state.collapsed} 
             clear={this.clear}/>
-          <Content className="content">
-            <Routes />
-          </Content>
+            <Content className="content">
+              <Routes />
+            </Content>
           <Foot />
         </Layout>
       </Layout>
