@@ -46,7 +46,9 @@
   "scripts": {
     "start": "node scripts/start.js",
     "build": "react-app-rewired scripts/build.js",
-    "test": "react-app-rewired scripts/test.js --env=jsdom"
+    "test": "react-app-rewired scripts/test.js --env=jsdom",
+    "server": "nodemon ./server/bin/www",
+    "pm2": "pm2 server bin/www"
   },
   "jest": {
     "collectCoverageFrom": [
@@ -98,22 +100,44 @@
     "babel-preset-react-native-stage-0": "^1.0.1",
     "babel-preset-stage-2": "^6.24.1",
     "classnames": "^2.2.5",
+    "debug": "^3.1.0",
     "echarts": "^4.0.4",
     "echarts-for-react": "^2.0.8",
     "element-resize-event": "^2.0.9",
     "es6-promise": "^4.2.4",
+    "gzip": "^0.1.0",
+    "ioredis": "^3.2.2",
+    "jsonwebtoken": "^8.2.0",
     "koa": "^2.4.1",
+    "koa-bodyparser": "^4.2.0",
+    "koa-convert": "^1.2.0",
+    "koa-json": "^2.0.2",
+    "koa-jwt": "^3.3.0",
+    "koa-logger": "^3.1.0",
+    "koa-mysql-session": "^0.0.2",
+    "koa-onerror": "^4.0.0",
+    "koa-redis": "^3.1.2",
+    "koa-router": "^7.4.0",
+    "koa-router-cache": "^2.0.0",
+    "koa-session-ioredis": "^1.0.5",
+    "koa-session-minimal": "^3.0.4",
+    "koa2-cors": "^2.0.5",
+    "md5": "^2.2.1",
     "mobx": "^3.5.1",
     "mobx-react": "^4.4.1",
     "mobx-react-devtools": "^4.2.15",
     "mysql": "^2.15.0",
     "node-sass": "^4.7.2",
+    "nodemon": "^1.17.1",
+    "nprogress": "^0.2.0",
     "photoswipe": "^4.1.2",
     "prop-types": "^15.6.1",
     "react-adsense": "^0.0.4",
     "react-app-rewired": "^1.4.1",
     "react-router-dom": "^4.2.2",
+    "runkoa": "^1.5.9",
     "sass-loader": "^6.0.6",
     "screenfull": "^3.3.2"
-  }
+  },
+  "proxy": "http://localhost:3010"
 }

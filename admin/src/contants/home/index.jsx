@@ -1,11 +1,18 @@
 import React, { PureComponent } from 'react';
 import { Row, Col, Card, Timeline, Icon } from 'antd';
+// import axios from 'axios';
 import Dynamic from '../../components/echarts/dynamic ';
 import './home.scss';
+import Axios from '../../utils/http';
 
 export default class Home extends PureComponent {
   constructor(props) {
     super(props);
+  }
+  componentDidMount() {
+    Axios.get('/user').then(res => {
+      console.log(res)
+    })
   }
   render() {
     return (
